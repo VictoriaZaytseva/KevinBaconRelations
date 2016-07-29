@@ -16,6 +16,6 @@ import com.voodoodyne.jackson.jsog.JSOGGenerator;
  *
  */
 public class Movie extends Node{
-  
+// empty constructor is a requirment of neo4j  
     public Movie() { }  
 }
