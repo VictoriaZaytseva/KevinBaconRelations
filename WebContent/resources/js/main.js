@@ -11,8 +11,8 @@ function isEven(n) {
 function beautify(data) {
 	//formats data to a right string
 	//[{"name":"a1","type":"a2"},{"name":"b1","type":"b2"}]
-	var result = "<p>Degrees of separation "+data.length+"</p>";
-	for (var i = 0; i < data.length; i++) {
+	var result = "<p>Degrees of separation "+(data.length-2)+"</p>";
+	for (var i = data.length-1; i >=0 ; i--) {
 		console.log(i)
 		console.log(data[i])
 		if(isEven(i))
@@ -34,7 +34,7 @@ $(document).ready(function() {
     		        'n' : n
     		      },
     		    'success' : function(data) {
-    		    	var response = beautify(JSON.parse(data));
+    		    	var response = beautify(data);
     		    	$( "#response" ).append(response);
     		    },
     		    'error': function(error){

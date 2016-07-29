@@ -18,18 +18,7 @@ import com.voodoodyne.jackson.jsog.JSOGGenerator;
  */
 public class Actor extends Node {
 
-	@Relationship(type = "ACTED_IN")
-	private List<Movie> movies;
-
 	public Actor() {
-	}
-
-	public List<Movie> getMovies() {
-		return movies;
-	}
-
-	public void setMovies(List<Movie> movies) {
-		this.movies = movies;
 	}
 
 }
