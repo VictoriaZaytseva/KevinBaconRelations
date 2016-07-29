@@ -2,7 +2,9 @@ package kevin.bacon.relations.com.domain;
 
 import org.neo4j.ogm.annotation.GraphId;
 /**
- * Base class with parameters for both actor and movie nodes
+ * Base class with parameters for both actor and movie nodes\
+ * Actor and movie are separate because neo4j actually makes difference based on the maping, plus good to know for the future
+ * if additional parameters are needed
  * @author victoria
  *
  */
