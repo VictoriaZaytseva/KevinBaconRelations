@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>App Direct Api Integration</title>
+<title>Welcome page</title>
 <style type="text/css">
 body {
 	background-color: #DBA8FF;
