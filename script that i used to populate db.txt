@@ -12,7 +12,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-// Parsing with A LOT of conditions
+// Parsing with A LOT of conditions. It is made to be used and discarded
 public class Main {
 	static Set<String> a = new HashSet<String>();
 	static Set<String> m = new HashSet<String>();
