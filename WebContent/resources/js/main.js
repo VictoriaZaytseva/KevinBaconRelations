@@ -9,19 +9,16 @@ function isEven(n) {
 //format json to the right string
 function beautify(data) {
 	if(data.length > 0){
-	var result = "<p class= \"response-line\">Degrees of separation "+(data.length-2)+"</p>";
-	for (var i = data.length-1; i >=0 ; i--) {
-		console.log(i)
-		console.log(data[i])
-		if(isEven(i))
-			result = result+"<p class= \"response-line\">"+data[i].name;
-		else
-			result = result + " - " + data[i].name + "</p>";
-	}
-    return result+ "</p>";             // The function returns the product of p1 and p2
-	}else{
+		var result = "<p class= \"response-line\">Degrees of separation "+(data.length-2)+"</p>";
+		for (var i = data.length-1; i >=0 ; i--) {
+			if(isEven(i))
+				result = result+"<p class= \"response-line\">"+data[i].name;
+			else
+				result = result + " - " + data[i].name + "</p>";
+		}
+	    		return result+ "</p>";      
+	} else
 		return notFound;
-	}
 } 
 //updateDom with the new response
 function updateDom(response){
@@ -58,7 +55,7 @@ $(document).ready(function() {
     		    'error': function(error){
     		    	console.log(error);
     		    }
-    		  }); 
+    	}); 
     }); 
 });
 
