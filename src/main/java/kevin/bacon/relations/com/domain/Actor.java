@@ -17,8 +17,7 @@ import com.voodoodyne.jackson.jsog.JSOGGenerator;
  *
  */
 public class Actor extends Node {
-
+// empty constructor is a requirment of Neo4j
 	public Actor() {
 	}
-
 }
