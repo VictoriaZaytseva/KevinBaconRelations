@@ -10,10 +10,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-
+// to do - make kevin bacon name constant. and make findShortestPath to any actor
 @RepositoryRestResource(collectionResourceRel = "movies", path = "movies")
 public interface MovieRepository extends GraphRepository<Movie> {
-    @Query("MATCH (m:Movie)<-[:ACTED_IN]-(a:Actor) RETURN m.name as movie, collect(a.name) as cast LIMIT {limit}")
-    List<Map<String,Object>> graph(@Param("limit") int limit);
+   @Query("MATCH p=shortestPath((bacon:Actor {name:\"Kevin Bacon\"})-[*]-(meg:Actor {name:{name}}))RETURN NODES(p)")
+   Iterable<Map<String, Object>> findShortestPathTo(@Param("name") String name);
 }
 
