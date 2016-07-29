@@ -12,7 +12,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-// Parsing with A LOT of conditions:/ Neo4j is not a fool 
+// Parsing with A LOT of conditions
 public class Main {
 	static Set<String> a = new HashSet<String>();
 	static Set<String> m = new HashSet<String>();
