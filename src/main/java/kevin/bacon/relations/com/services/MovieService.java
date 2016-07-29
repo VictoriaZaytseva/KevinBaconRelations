@@ -14,7 +14,10 @@ public class MovieService {
 
    @Autowired MovieRepository movieRepository;
    private ArrayList<Object> format(Iterator<Map<String, Object>> result) {
-	   	return (ArrayList<Object>) result.next().get("NODES(p)");
+	   if(result.hasNext())
+	   	   return (ArrayList<Object>) result.next().get("NODES(p)");
+	   else 
+		   return new ArrayList<Object>();
     }
 
     public ArrayList<Object> graph(String name) {

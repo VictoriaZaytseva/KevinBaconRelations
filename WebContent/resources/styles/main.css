@@ -13,15 +13,24 @@ button {
     font-size: 20px;
     padding: 5px;
     border-radius: 4px;
+    height: 30px;
+    padding: 3px;
+    width: 67px;
 }
 
 input {
 	font-size: 20px;
     border-radius: 4px;
     border: none;
+    height: 28px;
 }
 
 .centered {
 	margin-top: 25%;
 	text-align: center;
+	background-color: black;
+    heigth: 35px;
+    padding-bottom: 55px;
+    padding-top: 10px;
+    border-radius: 10px;
 }

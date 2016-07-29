@@ -9,13 +9,15 @@
 </head>
 <body>
 	<br>
-	<div class = "centered">
-		<h2>
-			Welcome to the Bacon<br> <br>
-		</h2>
-		<input class = "search-query" id = "searchQuery"/>
-		<button id = "btn" >find</button>
-		<div id = "response"></div>
+	<div class = "container">
+		<div class = "centered">
+			<h2>
+				Search a relation to our beloved KB!
+			</h2>
+			<input class = "search-query" id = "searchQuery"/>
+			<button id = "btn" >find</button>
+			<div id = "response"></div>
+		</div>
 	</div>
 </body>
 </html>
