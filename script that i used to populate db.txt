@@ -1,0 +1,110 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+public class Main {
+	static Set<String> a = new HashSet<String>();
+	static Set<String> m = new HashSet<String>();
+	public static String createQuery(Object obj){
+    	JSONObject jsonObject =  (JSONObject) obj;
+    	//System.out.println(jsonObject.toString());           	
+    	JSONObject film = (JSONObject)jsonObject.get("film");       	
+    	JSONArray actors = (JSONArray)jsonObject.get("cast");
+    	String queryMovie = "";
+    	String queryActors = "";
+    	String queryRelation = "";
+    	String matchRelation="";
+    	if(!m.contains(film.get("name"))){
+    	m.add((String) film.get("name"));
+    	queryMovie = "MERGE (`"+film.get("name")+"`:Movie { name:'"+film.get("name")+"',image:'"+film.get("image")+"'});"+"\n";
+    	
+        Iterator<JSONObject> iterator = actors.iterator();
+      
+        queryRelation ="CREATE ";
+        Boolean wasNext = false;
+        while (iterator.hasNext()) {
+        	wasNext = false;
+        	JSONObject temp = iterator.next();
+        	String name = (String) temp.get("name");
+        	if(!a.contains(name)){
+        		a.add(name);
+	        	if(name !=null){
+	        		String image = (String)temp.get("image");
+	        	if(image == null)
+		        		image = "";
+		        	queryActors=queryActors + "MERGE (`"+name+"`:Actor {name: '"+name+"', image: '"+image+"'});"+"\n";
+	        	}
+	        	queryRelation=queryRelation+"(`"+name+"`)-"+"[:ACTED_IN]->"+"(`"+film.get("name")+"`)";
+        		if (iterator.hasNext()){
+            		queryRelation = queryRelation +","+ "\n";
+        		}
+        	}else{
+        			wasNext =true;
+            		//matchRelation="MATCH (a:Actor {name:'"+name+"'}) CREATE (a)-[:ACTED_IN]->(`"+film.get("name")+"`);"+"\n";
+        	}
+    		matchRelation=matchRelation+"MATCH (a:Actor {name:'"+name+"'}), (m:Movie {name:'"+film.get("name")+"'}) CREATE (a)-[:ACTED_IN]->(m);"+"\n";
+
+        	//System.out.println(iterator.next().toString());
+            
+        }
+        System.out.println(wasNext);
+        if(wasNext){
+        	System.out.println("wasnext");
+        	queryRelation = queryRelation.substring(0, queryRelation.length()-2);}
+        if(queryRelation == "CREATE ")
+        	queryRelation ="";
+        else
+        	queryRelation =queryRelation+";"+"\n";
+        	
+    	}    	
+        return queryMovie+queryActors+matchRelation;
+	}
+	
+	public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException {
+		// TODO Auto-generated method stub
+		JSONParser parser = new JSONParser();
+		File folder = new File("/home/victoria/development/films/");
+		File[] listOfFiles = folder.listFiles();
+		PrintWriter writer = new PrintWriter("/home/victoria/development/merged.txt", "UTF-8");
+		System.out.println(listOfFiles.length);
+		
+		int i = 0;
+		for (File file : listOfFiles) {
+		    if (file.isFile()) {
+		        try {
+		        	
+		        	i++;
+					Object obj = parser.parse(new FileReader(file));
+					writer.println(createQuery(obj));
+					writer.flush();
+					
+					
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					System.out.println(file.getName());
+					e.printStackTrace();
+				}
+		    }
+		}
+		System.out.println("DONE");
+	   }
+}
+
+
